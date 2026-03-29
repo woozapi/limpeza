@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import * as defaultConfig from '../data/siteConfig';
-import { supabase } from '../lib/supabase';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 
 // Tipagem para a configuração do site (Simplificada)
 export type LeadStatus = 'novo' | 'em_contato' | 'agendado' | 'finalizado';
@@ -74,6 +74,12 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   // --- Função: Sincronizar com Banco de Dados (Supabase) ---
   useEffect(() => {
     const fetchData = async () => {
+      if (!isSupabaseConfigured()) {
+        console.warn('Supabase não configurado. Usando dados locais.');
+        setIsLoading(false);
+        return;
+      }
+
       try {
         // 1. Carregar Configuração do Site
         const { data: configData, error: configError } = await supabase
@@ -117,6 +123,8 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     const updatedConfig = { ...config, ...newConfig };
     setConfig(updatedConfig);
 
+    if (!isSupabaseConfigured()) return;
+
     // Persistir no Banco de Dados
     const { leads, ...pureData } = updatedConfig;
     try {
@@ -134,6 +142,8 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     
     // UI Update (Otimista)
     setConfig(prev => ({ ...prev, leads: [newLead, ...prev.leads] }));
+
+    if (!isSupabaseConfigured()) return;
 
     // DB Update
     try {
@@ -154,6 +164,8 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       leads: prev.leads.map(l => l.id === id ? { ...l, status } : l)
     }));
 
+    if (!isSupabaseConfigured()) return;
+
     try {
       await supabase.from('leads').update({ status }).eq('id', id);
     } catch (e) {}
@@ -164,6 +176,8 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       ...prev,
       leads: prev.leads.filter(l => l.id !== id)
     }));
+
+    if (!isSupabaseConfigured()) return;
 
     try {
       await supabase.from('leads').delete().eq('id', id);
