@@ -25,7 +25,7 @@ export default function HomePage() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
         <nav className="max-w-7xl mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
           <div className="flex items-center group cursor-pointer">
-            <Logo className="h-14 sm:h-20 lg:h-28 py-1" />
+            <Logo className="h-20 sm:h-24 lg:h-32 py-1" />
           </div>
           
           <div className="hidden md:flex items-center gap-10">
@@ -175,8 +175,9 @@ export default function HomePage() {
       </main>
 
       <footer className="bg-white border-t py-16 sm:py-24 lg:py-32 text-center px-4">
-        <Logo className="h-20 sm:h-28 lg:h-32 mb-6 sm:mb-8 mx-auto" />
-        <p className="text-slate-400 font-semibold uppercase tracking-widest text-xs sm:text-sm">Florianópolis e Região</p>
+        <Logo className="h-28 sm:h-36 lg:h-44 mb-6 sm:mb-8 mx-auto" />
+        <p className="text-slate-400 font-semibold uppercase tracking-widest text-xs sm:text-sm mb-8">Florianópolis e Região</p>
+        <p className="text-slate-300 text-[10px] sm:text-xs font-medium">Desenvolvido por <a href="https://woosites.com.br" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 font-bold transition-colors">Woo Sites</a></p>
       </footer>
       <ChatWidget />
     </div>
