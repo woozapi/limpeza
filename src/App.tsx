@@ -14,6 +14,10 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/limpeza-florianopolis" element={<HomePage city="Florianópolis" />} />
+      <Route path="/limpeza-sao-jose" element={<HomePage city="São José" />} />
+      <Route path="/limpeza-palhoca" element={<HomePage city="Palhoça" />} />
+      <Route path="/limpeza-biguacu" element={<HomePage city="Biguaçu" />} />
       <Route path="/painel/login" element={<AdminPanel isLogin />} />
       <Route 
         path="/painel" 

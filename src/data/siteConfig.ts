@@ -19,7 +19,7 @@ export const WHATSAPP_LINK = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 export const heroData = {
   headline: "Precisa de limpeza?\nA gente resolve.",
-  subheadline: "Rápido, fácil e sem complicação.",
+  subheadline: "Atendimento completo na Grande Florianópolis: São José, Palhoça e Biguaçu.",
   bullets: [
     "Atendimento rápido",
     "Equipe confiável",

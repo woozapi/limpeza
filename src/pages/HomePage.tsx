@@ -15,9 +15,32 @@ import { Logo } from '../components/Logo';
 import ChatWidget from '../components/ChatWidget';
 import { useConfig } from '../context/ConfigContext';
 
-export default function HomePage() {
+interface HomePageProps {
+  city?: string;
+}
+
+export default function HomePage({ city }: HomePageProps) {
   const { config, isLoading } = useConfig();
   const { heroData, benefits, services, testimonials, salesBlock, WHATSAPP_LINK, WHATSAPP_NUMBER } = config;
+
+  // Personalização de SEO para Landing Pages Regionais
+  const displayHeadline = city 
+    ? `Serviços de limpeza e faxina profissional em ${city}`
+    : heroData.headline;
+
+  const displaySubheadline = city
+    ? `Atendimento rápido e garantido para sua casa ou empresa em ${city} e região.`
+    : heroData.subheadline;
+
+  React.useEffect(() => {
+    if (city) {
+      document.title = `RM Limpeza Clean | Faxina Profissional em ${city} e Região`;
+      const metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc) {
+        metaDesc.setAttribute('content', `Procurando faxina ou limpeza em ${city}? A RM Limpeza Clean atende toda a região com equipe profissional e preço justo. Peça agora!`);
+      }
+    }
+  }, [city]);
 
   if (isLoading) {
     return (
@@ -64,11 +87,11 @@ export default function HomePage() {
               className="text-center lg:text-left"
             >
               <h1 className="text-3xl sm:text-4xl lg:text-[60px] font-bold leading-[1.15] mb-5 sm:mb-8 text-slate-900 tracking-tight whitespace-pre-line">
-                {heroData.headline}
+                {displayHeadline}
               </h1>
               
               <p className="text-base sm:text-xl lg:text-2xl text-slate-600 mb-6 sm:mb-10 max-w-lg mx-auto lg:mx-0 font-medium">
-                {heroData.subheadline}
+                {displaySubheadline}
               </p>
 
               <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-12 border-l-4 border-blue-600 pl-4 sm:pl-6 text-left inline-block lg:block">
@@ -99,7 +122,7 @@ export default function HomePage() {
               <div className="relative z-10 rounded-[32px] sm:rounded-[64px] overflow-hidden shadow-2xl border-4 sm:border-8 border-white ring-1 ring-slate-100">
                 <img 
                   src={heroData.imagePath} 
-                  alt="Profissional"
+                  alt="Serviços de limpeza e faxina profissional na Grande Florianópolis"
                   className="w-full h-[300px] sm:h-[450px] lg:h-[650px] object-cover"
                 />
               </div>
@@ -166,6 +189,20 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* REGIÕES ATENDIDAS (SEO) */}
+        <section className="py-12 bg-slate-50 border-y border-slate-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
+            <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Atendemos em toda região</h2>
+            <div className="flex flex-wrap justify-center gap-4 sm:gap-8 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
+               <span className="font-display font-bold text-slate-900 text-lg sm:text-2xl">Florianópolis</span>
+               <span className="font-display font-bold text-slate-900 text-lg sm:text-2xl">São José</span>
+               <span className="font-display font-bold text-slate-900 text-lg sm:text-2xl">Palhoça</span>
+               <span className="font-display font-bold text-slate-900 text-lg sm:text-2xl">Biguaçu</span>
+            </div>
+            <p className="mt-6 text-slate-500 text-sm font-medium">Bairros como Centro, Kobrasol, Pedra Branca, Trindade e Estreito.</p>
+          </div>
+        </section>
+
         {/* CTA FINAL */}
         <section id="contato" className="py-20 sm:py-32 lg:py-40 bg-white text-center">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -184,7 +221,7 @@ export default function HomePage() {
 
       <footer className="bg-white border-t py-16 sm:py-24 lg:py-32 text-center px-4">
         <Logo className="h-28 sm:h-36 lg:h-44 mb-6 sm:mb-8 mx-auto" />
-        <p className="text-slate-400 font-semibold uppercase tracking-widest text-xs sm:text-sm mb-8">Florianópolis e Região</p>
+        <p className="text-slate-400 font-bold uppercase tracking-widest text-[10px] sm:text-xs mb-8">Atendimento em Florianópolis, São José, Palhoça e Biguaçu</p>
         <p className="text-slate-300 text-[10px] sm:text-xs font-medium">Desenvolvido por <a href="https://woosites.com.br" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-600 font-bold transition-colors">Woo Sites</a></p>
       </footer>
       <ChatWidget />
