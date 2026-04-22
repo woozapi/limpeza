@@ -22,6 +22,8 @@ export interface SiteConfig {
   services: typeof defaultConfig.services;
   testimonials: typeof defaultConfig.testimonials;
   salesBlock: typeof defaultConfig.salesBlock;
+  trustProcess: typeof defaultConfig.trustProcess;
+  faq: typeof defaultConfig.faq;
   logoPath: string;
   leads: Lead[];
 }
@@ -62,6 +64,8 @@ export const ConfigProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       services: defaultConfig.services,
       testimonials: defaultConfig.testimonials,
       salesBlock: defaultConfig.salesBlock,
+      trustProcess: defaultConfig.trustProcess,
+      faq: defaultConfig.faq,
       logoPath: '/logo-rm-original.png',
       leads: [],
     };

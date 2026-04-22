@@ -4,20 +4,24 @@ import { getIcon } from '../lib/icons';
 
 export interface ServiceItemProps {
   icon: string;
-  label: string;
+  title: string;
+  description: string;
 }
 
-export const ServiceItem: React.FC<ServiceItemProps> = ({ icon, label }) => {
+export const ServiceItem: React.FC<ServiceItemProps> = ({ icon, title, description }) => {
   const Icon = getIcon(icon);
   return (
     <motion.div 
-      whileHover={{ scale: 1.02 }}
-      className="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 bg-white rounded-2xl sm:rounded-3xl shadow-[0_4px_20px_rgba(0,0,0,0.02)] border border-slate-50 transition-all hover:shadow-md group"
+      whileHover={{ y: -5 }}
+      className="flex flex-col gap-4 p-6 sm:p-8 bg-white rounded-3xl shadow-[0_4px_30px_rgba(0,0,0,0.03)] border border-slate-100 transition-all hover:shadow-xl hover:border-blue-100 group"
     >
-      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-50 rounded-lg sm:rounded-xl flex items-center justify-center text-blue-600 transition-colors group-hover:bg-blue-600 group-hover:text-white shrink-0">
-        <Icon size={20} />
+      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 transition-all group-hover:bg-blue-600 group-hover:text-white shrink-0 shadow-inner">
+        <Icon size={24} />
       </div>
-      <span className="font-display font-semibold text-slate-800 text-sm sm:text-lg leading-tight">{label}</span>
+      <div>
+        <h3 className="font-display font-bold text-slate-900 text-lg sm:text-xl mb-2 group-hover:text-blue-600 transition-colors">{title}</h3>
+        <p className="text-slate-500 text-sm sm:text-base leading-relaxed">{description}</p>
+      </div>
     </motion.div>
   );
 };

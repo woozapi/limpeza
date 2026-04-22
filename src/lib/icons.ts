@@ -7,6 +7,14 @@ import {
   ShieldCheck, 
   BadgeDollarSign,
   School,
+  Zap,
+  Target,
+  RotateCcw,
+  Search,
+  Shield,
+  ThumbsUp,
+  Layers,
+  Heart,
   LucideIcon
 } from 'lucide-react';
 
@@ -19,6 +27,14 @@ export const ICON_MAP: Record<string, LucideIcon> = {
   ShieldCheck,
   BadgeDollarSign,
   School,
+  Zap,
+  Target,
+  RotateCcw,
+  Search,
+  Shield,
+  ThumbsUp,
+  Layers,
+  Heart
 };
 
 export const getIcon = (name: string): LucideIcon => {

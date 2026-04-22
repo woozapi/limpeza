@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star } from 'lucide-react';
+import { Star, Quote } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export interface TestimonialCardProps {
@@ -12,26 +12,31 @@ export interface TestimonialCardProps {
 export const TestimonialCard: React.FC<TestimonialCardProps> = ({ name, company, quote, rating }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      className="bg-white p-6 sm:p-8 rounded-[20px] sm:rounded-[32px] shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-slate-50 flex flex-col h-full hover:shadow-lg transition-shadow"
+      className="bg-white p-8 sm:p-10 rounded-[48px] shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-50 flex flex-col h-full hover:shadow-2xl transition-all duration-500 group"
     >
-      <div className="flex gap-1 mb-4 sm:mb-6">
+      <div className="flex gap-1 mb-6">
         {[...Array(rating)].map((_, i) => (
-          <Star key={i} size={14} className="fill-blue-600 text-blue-600 sm:w-4 sm:h-4" />
+          <Star key={i} size={18} className="fill-amber-400 text-amber-400" />
         ))}
       </div>
-      <p className="text-slate-600 italic mb-6 sm:mb-8 flex-grow leading-relaxed font-sans text-sm sm:text-base">
-        "{quote}"
-      </p>
-      <div className="flex items-center gap-3 sm:gap-4 pt-4 sm:pt-6 border-t border-slate-50">
-        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-display font-bold text-sm sm:text-lg shrink-0">
+      
+      <div className="relative flex-grow">
+        <Quote className="absolute -top-2 -left-4 text-slate-100 w-12 h-12 -z-10 group-hover:text-blue-50 transition-colors" />
+        <p className="text-slate-600 font-medium mb-10 leading-relaxed font-sans text-lg relative z-10">
+          "{quote}"
+        </p>
+      </div>
+
+      <div className="flex items-center gap-5 pt-8 border-t border-slate-50">
+        <div className="w-14 h-14 bg-slate-900 rounded-2xl flex items-center justify-center text-white font-extrabold text-xl shrink-0 shadow-lg shadow-slate-200 group-hover:bg-blue-600 transition-colors">
           {name.charAt(0)}
         </div>
         <div className="min-w-0">
-          <div className="font-display font-bold text-slate-900 text-sm sm:text-base truncate">{name}</div>
-          <div className="text-[9px] sm:text-[10px] font-bold text-blue-600 uppercase tracking-widest">{company}</div>
+          <div className="font-bold text-slate-900 text-lg truncate tracking-tight">{name}</div>
+          <div className="text-[10px] font-black text-blue-600 uppercase tracking-[0.15em]">{company}</div>
         </div>
       </div>
     </motion.div>
